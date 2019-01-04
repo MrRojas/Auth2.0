@@ -1,7 +1,12 @@
+// server
 const express = require("express");
 const bodyParser = require("body-parser");
+// especifica para nodeJS, revisar jwt.io
 const jwt = require("jsonwebtoken");
+
 const request = require("request");
+
+// por defecto agregar ./config/index.js
 const { config } = require("./config");
 
 const encodeBasic = require("./utils/encodeBasic");
@@ -33,11 +38,7 @@ function getUserPlaylists(accessToken, userId) {
   });
 }
 
-app.post("/api/auth/token", function(req, res) {
-  const { email, username, name } = req.body;
-  const token = jwt.sign({ sub: username, email, name }, config.authJwtSecret);
-  res.json({ access_token: token });
-});
+
 
 app.get("/api/auth/verify", function(req, res, next) {
   const { access_token } = req.query;
@@ -78,6 +79,22 @@ app.get("/api/playlists", async function(req, res, next) {
   });
 });
 
+
+
+// firmar token
+
+app.post("/api/auth/token", function(req, res) {
+  // recibe los datos 
+  const { email, username, name } = req.body;
+  // genera el token
+  const token = jwt.sign({ sub: username, email, name }, config.authJwtSecret);
+  // devuelve el token
+  res.json({ access_token: token });
+});
+
+
+
+// levantar servidor 
 const server = app.listen(5000, function() {
   console.log(`Listening http://localhost:${server.address().port}`);
 });
