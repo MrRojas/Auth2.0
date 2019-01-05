@@ -40,16 +40,7 @@ function getUserPlaylists(accessToken, userId) {
 
 
 
-app.get("/api/auth/verify", function(req, res, next) {
-  const { access_token } = req.query;
 
-  try {
-    const decoded = jwt.verify(access_token, config.authJwtSecret);
-    res.json({ message: "the access token is valid", username: decoded.sub });
-  } catch (err) {
-    next(err);
-  }
-});
 
 app.get("/api/playlists", async function(req, res, next) {
   const { userId } = req.query;
@@ -77,6 +68,23 @@ app.get("/api/playlists", async function(req, res, next) {
     const userPlaylists = await getUserPlaylists(accessToken, userId);
     res.json({ playlists: userPlaylists });
   });
+});
+
+
+// verificar token 
+app.get("/api/auth/verify", function(req, res, next) {
+  // obtener el access token 
+  const { access_token } = req.query;
+  
+  try {
+    // intenta decodificar
+    const decoded = jwt.verify(access_token, config.authJwtSecret);
+    // muestra si es valido
+    res.json({ message: "Bienvenido", username: decoded.sub });
+  } catch (err) {
+    // manejo de error con express devuelve mensaje en formato HTML pero deberia ser JSON en  una API 
+    next(err);
+  }
 });
 
 
