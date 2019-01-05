@@ -1,0 +1,3 @@
+# Protegiendo nuestros recursos con JWT
+
+Actualmente utilizamos dos algoritmos de cifrado para proteger nuestros JWT: RS256, donde necesitamos una llave publica y una privada para validar la información desde el servidor y el cliente (utiliza la RSA Signature con SHA-256), y HS256, donde tenemos un poco menos de seguridad ya que, utilizamos a misma llave para generar y validar los tokens (utiliza el HMAC también con SHA-256).
