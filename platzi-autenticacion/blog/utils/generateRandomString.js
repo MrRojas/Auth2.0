@@ -1,3 +1,4 @@
+//genera string aleatorio
 const generateRandomString = function(length) {
   let randomString = "";
   const possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // prettier-ignore

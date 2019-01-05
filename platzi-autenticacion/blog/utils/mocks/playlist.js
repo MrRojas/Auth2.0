@@ -1,3 +1,4 @@
+// Solo de Ejemplo para la casa 
 const playlistsMocks = [
   {
     id: "1t05tAI9VhTBBo9K8yI6jH",
